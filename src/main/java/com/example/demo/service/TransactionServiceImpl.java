@@ -76,7 +76,7 @@ public class TransactionServiceImpl implements TempoService<Transaction> {
         transactionRepository.deleteAll();
     }
 
-    public List<Transaction> findAllWithLimitExeeded() {
+    public List<Transaction> findAllWithLimitExceeded() {
         return transactionRepository.findAllWithLimitExceeded();
     }
 }

@@ -22,7 +22,7 @@ public class TransactionController {
 
     @GetMapping("/limitExceededList")
     public List<Transaction> getlimitExceededList() {
-        return transactionService.findAllWithLimitExeeded();
+        return transactionService.findAllWithLimitExceeded();
     }
 
     @PostMapping("/")
