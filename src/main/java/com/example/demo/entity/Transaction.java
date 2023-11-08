@@ -1,11 +1,15 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "transactions")
+@Getter
+@Setter
 public class Transaction {
 
     @Id
@@ -41,69 +45,5 @@ public class Transaction {
         this.summary = summary;
         this.expenseCategory = expenseCategory;
         this.datetime = datetime;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Integer getAccountFrom() {
-        return accountFrom;
-    }
-
-    public void setAccountFrom(Integer accountFrom) {
-        this.accountFrom = accountFrom;
-    }
-
-    public Integer getAccountTo() {
-        return accountTo;
-    }
-
-    public void setAccountTo(Integer accountTo) {
-        this.accountTo = accountTo;
-    }
-
-    public String getCurrencyShortname() {
-        return currencyShortname;
-    }
-
-    public void setCurrencyShortname(String currencyShortname) {
-        this.currencyShortname = currencyShortname;
-    }
-
-    public Float getSummary() {
-        return summary;
-    }
-
-    public void setSummary(Float summary) {
-        this.summary = summary;
-    }
-
-    public Category getExpenseCategory() {
-        return expenseCategory;
-    }
-
-    public void setExpenseCategory(Category expenseCategory) {
-        this.expenseCategory = expenseCategory;
-    }
-
-    public Timestamp getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Timestamp datetime) {
-        this.datetime = datetime;
-    }
-
-    public Boolean getLimitExceeded() {
-        return limitExceeded;
-    }
-
-    public void setLimitExceeded(Boolean limitExceeded) {
-        this.limitExceeded = limitExceeded;
     }
 }

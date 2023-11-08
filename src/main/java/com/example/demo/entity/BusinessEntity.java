@@ -1,11 +1,15 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "business_entity")
+@Getter
+@Setter
 public class BusinessEntity {
 
     public static final int DEFAULT_LIMIT = 1000;
@@ -83,85 +87,5 @@ public class BusinessEntity {
         this.sumOfGoods = DEFAULT_SUM;
         this.sumOfServices = DEFAULT_SUM;
         this.dateOfSum = new Timestamp(System.currentTimeMillis());
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getAccount() {
-        return account;
-    }
-
-    public void setAccount(Integer account) {
-        this.account = account;
-    }
-
-    public Integer getLimitOfGoods() {
-        return limitOfGoods;
-    }
-
-    public void setLimitOfGoods(Integer limitOfGoods) {
-        this.limitOfGoods = limitOfGoods;
-    }
-
-    public Integer getLimitOfServices() {
-        return limitOfServices;
-    }
-
-    public void setLimitOfServices(Integer limitOfServices) {
-        this.limitOfServices = limitOfServices;
-    }
-
-    public Timestamp getDateOfServicesLimit() {
-        return dateOfServicesLimit;
-    }
-
-    public void setDateOfServicesLimit(Timestamp dateOfServicesLimit) {
-        this.dateOfServicesLimit = dateOfServicesLimit;
-    }
-
-    public Timestamp getDateOfGoodsLimit() {
-        return dateOfGoodsLimit;
-    }
-
-    public void setDateOfGoodsLimit(Timestamp dateOfGoodsLimit) {
-        this.dateOfGoodsLimit = dateOfGoodsLimit;
-    }
-
-    public Float getSumOfServices() {
-        return sumOfServices;
-    }
-
-    public void setSumOfServices(Float sumOfServices) {
-        this.sumOfServices = sumOfServices;
-    }
-
-    public Float getSumOfGoods() {
-        return sumOfGoods;
-    }
-
-    public void setSumOfGoods(Float sumOfGoods) {
-        this.sumOfGoods = sumOfGoods;
-    }
-
-    public Timestamp getDateOfSum() {
-        return dateOfSum;
-    }
-
-    public void setDateOfSum(Timestamp dateOfSum) {
-        this.dateOfSum = dateOfSum;
     }
 }
