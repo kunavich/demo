@@ -58,6 +58,7 @@ public class BusinessEntity {
         this.dateOfSum = new Timestamp(System.currentTimeMillis());
     }
 
+    /*
     public BusinessEntity(String name, Integer account, Category limitCategory, Integer limit) {
         this.name = name;
         this.account = account;
@@ -88,4 +89,6 @@ public class BusinessEntity {
         this.sumOfServices = DEFAULT_SUM;
         this.dateOfSum = new Timestamp(System.currentTimeMillis());
     }
+
+     */
 }

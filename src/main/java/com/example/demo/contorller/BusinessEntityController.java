@@ -1,5 +1,7 @@
 package com.example.demo.contorller;
 
+import com.example.demo.dto.BusinessEntityDto;
+import com.example.demo.dto.BusinessEntityLimitDto;
 import com.example.demo.entity.BusinessEntity;
 import com.example.demo.entity.Category;
 import com.example.demo.service.BusinessEntityServiceImpl;
@@ -17,14 +19,28 @@ public class BusinessEntityController {
     private BusinessEntityServiceImpl businessEntityService;
 
     @PostMapping("/setLimit")
-    public void setLimit(int account, int limit,String category) {
-        Category cat = Category.valueOf(category);
-        businessEntityService.setLimit(account,limit,cat);
+    public void setLimit(BusinessEntityLimitDto limitDto) {
+        Category cat = Category.valueOf(limitDto.getCategory());
+        businessEntityService.setLimit(limitDto.getAccount(),limitDto.getLimit(),cat);
     }
 
     @PostMapping("/")
-    public void newBusinessEntity(BusinessEntity businessEntity) {
-        businessEntityService.save(businessEntity);
+    public void newBusinessEntity(BusinessEntityDto businessEntityDto) {
+        businessEntityService.save(new BusinessEntity( businessEntityDto.getName(),businessEntityDto.getAccount()));
     }
+
+    /*
+    @PostMapping("/")
+    public void newBusinessEntity(String name, Integer account,String limitCategory, Integer limit) {
+        Category category = Category.valueOf(limitCategory);
+        businessEntityService.save(new BusinessEntity( name,account,category,limit));
+    }
+
+    @PostMapping("/")
+    public void newBusinessEntity(String name, Integer account, Integer limitOfGoods, Integer limitOfServices) {
+        businessEntityService.save(new BusinessEntity( name,account,limitOfGoods,limitOfServices));
+    }
+
+     */
 
 }
