@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction,Integer> {
 
-    @Query("SELECT * FROM transactions WHERE limit_exceeded !=0")
+    @Query(value = "SELECT * FROM transactions t WHERE t.limit_exceeded != 0",nativeQuery = true)
     List<Transaction> findAllWithLimitExceeded();
 
 }
