@@ -39,7 +39,7 @@ public class TransactionServiceImpl  {
         LocalDate currentDate = LocalDate.now();
         if ( dateOfSum.getMonth() == currentDate.getMonth() && dateOfSum.getYear() != currentDate.getYear()) {
             businessEntity.setDateOfSum( new Timestamp(System.currentTimeMillis()));
-            if (transaction.getExpenseCategory().equals(Category.PRODUCT)) {
+            if (Category.valueOf(transaction.getExpenseCategory()).equals(Category.PRODUCT)) {
                 businessEntity.setSumOfServices(0f);
             } else {
                 businessEntity.setSumOfServices(0f);
@@ -49,7 +49,7 @@ public class TransactionServiceImpl  {
         Integer limit;
         Float sumUSD = transaction.getSummary() / exchangeRate.getRate();
 
-        if (transaction.getExpenseCategory().equals(Category.PRODUCT)) {
+        if (Category.valueOf(transaction.getExpenseCategory()).equals(Category.PRODUCT)) {
             limit = businessEntity.getLimitOfGoods();
             sumUSD += businessEntity.getSumOfGoods();
             businessEntity.setSumOfGoods(sumUSD);
@@ -82,7 +82,7 @@ public class TransactionServiceImpl  {
     }
 
 
-    /*
+    /* TODO use JOIN
     SELECT t.account_from, t.account_to, t.currency_shortname, t.summary, t.expense_category, t.datetime, b.limit_of_goods,
      b.date_of_goods_limit, b.limit_of_services, b.date_of_services_limit FROM transactions t
      INNER JOIN business_entity b ON t.account_from=b.account WHERE t.limit_exceeded != 0;"
@@ -90,7 +90,7 @@ public class TransactionServiceImpl  {
     public List<TransactionWithLimitsDto> findAllWithLimitExceeded() {
         List<TransactionWithLimitsDto> list = new ArrayList<>();
 
-        transactionRepository.findAllWithLimitExceeded().stream().forEach( e -> {
+        transactionRepository.findAllWithLimitExceeded().forEach( e -> {
             BusinessEntity businessEntity = businessEntityService.findByAccount(e.getAccountFrom());
             list.add(new TransactionWithLimitsDto(e,businessEntity));
         });

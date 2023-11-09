@@ -20,9 +20,11 @@ public class Transaction {
     @Column(name = "id")
     private int id;
 
+    //TODO leading zero not allowed && out of range ex 999999999
     @Column(name = "account_from")
     private Integer accountFrom;
 
+    //TODO leading zero not allowed && out of range ex 999999999
     @Column(name = "account_to")
     private Integer accountTo;
 

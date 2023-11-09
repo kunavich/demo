@@ -25,6 +25,7 @@ public class ExchangeRate {
     @Column(name = "rate")
     private float rate;
 
+    //TODO UNix time to normal
     @Column(name = "rate_timestamp")
     private Timestamp timestamp;
 
