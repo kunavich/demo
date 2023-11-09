@@ -2,12 +2,16 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "exchange_rate")
 @Getter
+@Setter
+@NoArgsConstructor
 public class ExchangeRate {
 
     @Id

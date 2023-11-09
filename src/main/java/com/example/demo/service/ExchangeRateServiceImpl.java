@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.dao.ExchangeRateRepository;
 import com.example.demo.entity.ExchangeRate;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -51,31 +50,33 @@ public class ExchangeRateServiceImpl implements TempoService<ExchangeRate> {
 
     //@Transactional
     public ExchangeRate findBySymbol(String symbol) {
-        ExchangeRate exchangeRate = exchangeRateRepository.findBySymbol(symbol);
+        ExchangeRate exchangeRate = exchangeRateRepository.findBySymbol("USD/"+symbol);
 
         Timestamp timestamp = exchangeRate.getTimestamp();
         Date date = new Date(timestamp.getTime());
         Date currentDate = new Date(System.currentTimeMillis());
         if (!currentDate.equals(date)) {
-            exchangeRate = update(symbol);
+            exchangeRate = update(symbol, exchangeRate.getId());
         }
         return exchangeRate;
     }
 
     @Transactional
-    public ExchangeRate update(String symbol) {
+    public ExchangeRate update(String symbol,int id) {
         ExchangeRate exchangeRate = getNewExchangeRate(symbol);
+        exchangeRate.setId(id);
         return exchangeRateRepository.save(exchangeRate);
     }
 
     private ExchangeRate getNewExchangeRate(String symbol) {
-        JSONArray jsonArray = connect(symbol);
-        float rate = Float.parseFloat(jsonArray.get(1).toString());
-        Timestamp timestamp = new Timestamp(Long.parseLong(jsonArray.get(2).toString()));
-        return new ExchangeRate(jsonArray.get(0).toString(), rate, timestamp);
+        JSONObject json = connect(symbol);
+
+        float rate = Float.parseFloat(json.get("rate").toString());
+        Timestamp timestamp = new Timestamp(Long.parseLong(json.get("timestamp").toString()));
+        return new ExchangeRate(json.get("symbol").toString(), rate, timestamp);
     }
 
-    private JSONArray connect(String symbol) {
+    private JSONObject connect(String symbol) {
         JSONParser parser = new JSONParser();
         StringBuffer responseData = new StringBuffer();
         try {
@@ -96,11 +97,9 @@ public class ExchangeRateServiceImpl implements TempoService<ExchangeRate> {
             }
 
             JSONObject json = (JSONObject) parser.parse(responseData.toString());
-            JSONObject meta = (JSONObject) json.get("meta");
-            JSONArray values = (JSONArray) json.get("values");
 
             connection.disconnect();
-            return values;
+            return json;
         } catch (ParseException e) {
             throw new RuntimeException("json parser is wrong", e);
         } catch (IOException e) {

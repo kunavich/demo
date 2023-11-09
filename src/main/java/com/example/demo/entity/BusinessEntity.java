@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 @Table(name = "business_entity")
 @Getter
 @Setter
+@NoArgsConstructor
 public class BusinessEntity {
 
     public static final int DEFAULT_LIMIT = 1000;

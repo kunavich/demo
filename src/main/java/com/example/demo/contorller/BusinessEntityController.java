@@ -7,6 +7,7 @@ import com.example.demo.entity.Category;
 import com.example.demo.service.BusinessEntityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,13 +20,13 @@ public class BusinessEntityController {
     private BusinessEntityServiceImpl businessEntityService;
 
     @PostMapping("/setLimit")
-    public void setLimit(BusinessEntityLimitDto limitDto) {
+    public void setLimit(@RequestBody BusinessEntityLimitDto limitDto) {
         Category cat = Category.valueOf(limitDto.getCategory());
         businessEntityService.setLimit(limitDto.getAccount(),limitDto.getLimit(),cat);
     }
 
     @PostMapping("/")
-    public void newBusinessEntity(BusinessEntityDto businessEntityDto) {
+    public void newBusinessEntity(@RequestBody BusinessEntityDto businessEntityDto) {
         businessEntityService.save(new BusinessEntity( businessEntityDto.getName(),businessEntityDto.getAccount()));
     }
 
