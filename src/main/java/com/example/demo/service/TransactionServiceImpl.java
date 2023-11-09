@@ -37,16 +37,7 @@ public class TransactionServiceImpl  {
         ExchangeRate exchangeRate = exchangeRateService.findBySymbol(transaction.getCurrencyShortname());
         BusinessEntity businessEntity = businessEntityService.findByAccount(transaction.getAccountFrom());
 
-        LocalDate dateOfSum = businessEntity.getDateOfSum().toLocalDateTime().toLocalDate();
-        LocalDate currentDate = LocalDate.now();
-        if ( dateOfSum.getMonth() == currentDate.getMonth() && dateOfSum.getYear() != currentDate.getYear()) {
-            businessEntity.setDateOfSum( new Timestamp(System.currentTimeMillis()));
-            if (Category.valueOf(transaction.getExpenseCategory()).equals(Category.PRODUCT)) {
-                businessEntity.setSumOfServices(0f);
-            } else {
-                businessEntity.setSumOfServices(0f);
-            }
-        }
+        businessEntity = checkSumDate( businessEntity);
 
         Integer limit;
         Float sumUSD = transaction.getSummary() / exchangeRate.getRate();
@@ -60,9 +51,21 @@ public class TransactionServiceImpl  {
             sumUSD += businessEntity.getSumOfServices();
             businessEntity.setSumOfServices(sumUSD);
         }
+
         transaction.setLimitExceeded(limit < sumUSD);
         businessEntityService.save(businessEntity);
         return transactionRepository.save(transaction);
+    }
+
+    private BusinessEntity checkSumDate( BusinessEntity businessEntity) {
+        LocalDate dateOfSum = businessEntity.getDateOfSum().toLocalDateTime().toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        if ( dateOfSum.getMonth() != currentDate.getMonth() && dateOfSum.getYear() != currentDate.getYear()) {
+            businessEntity.setDateOfSum( new Timestamp(System.currentTimeMillis()));
+            businessEntity.setSumOfServices(0f);
+            businessEntity.setSumOfServices(0f);
+        }
+        return businessEntity;
     }
 
     public List<Transaction> findAll() {
