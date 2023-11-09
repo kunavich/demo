@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.TransactionRepository;
+import com.example.demo.dto.TransactionDto;
+import com.example.demo.dto.TransactionWithLimitsDto;
 import com.example.demo.entity.BusinessEntity;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.ExchangeRate;
@@ -11,10 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TransactionServiceImpl implements TempoService<Transaction> {
+public class TransactionServiceImpl  {
 
     @Autowired
     private TransactionRepository transactionRepository;
@@ -25,9 +28,9 @@ public class TransactionServiceImpl implements TempoService<Transaction> {
     @Autowired
     private ExchangeRateServiceImpl exchangeRateService;
 
-    @Override
     @Transactional
-    public Transaction save(Transaction transaction) {
+    public Transaction save(TransactionDto transactionDto) {
+        Transaction transaction = new Transaction(transactionDto);
 
         ExchangeRate exchangeRate = exchangeRateService.findBySymbol(transaction.getCurrencyShortname());
         BusinessEntity businessEntity = businessEntityService.findByAccount(transaction.getAccountFrom());
@@ -64,19 +67,33 @@ public class TransactionServiceImpl implements TempoService<Transaction> {
         return transactionRepository.findAll();
     }
 
-    @Override
+    public Transaction save(Transaction transaction) {
+        return null;
+    }
+
     @Transactional
     public void deleteById(Integer id) {
         transactionRepository.deleteById(id);
     }
 
-    @Override
     @Transactional
     public void deleteAll() {
         transactionRepository.deleteAll();
     }
 
-    public List<Transaction> findAllWithLimitExceeded() {
-        return transactionRepository.findAllWithLimitExceeded();
+
+    /*
+    SELECT t.account_from, t.account_to, t.currency_shortname, t.summary, t.expense_category, t.datetime, b.limit_of_goods,
+     b.date_of_goods_limit, b.limit_of_services, b.date_of_services_limit FROM transactions t
+     INNER JOIN business_entity b ON t.account_from=b.account WHERE t.limit_exceeded != 0;"
+     */
+    public List<TransactionWithLimitsDto> findAllWithLimitExceeded() {
+        List<TransactionWithLimitsDto> list = new ArrayList<>();
+
+        transactionRepository.findAllWithLimitExceeded().stream().forEach( e -> {
+            BusinessEntity businessEntity = businessEntityService.findByAccount(e.getAccountFrom());
+            list.add(new TransactionWithLimitsDto(e,businessEntity));
+        });
+        return list;
     }
 }

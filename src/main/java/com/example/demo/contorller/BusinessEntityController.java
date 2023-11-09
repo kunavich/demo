@@ -1,16 +1,13 @@
 package com.example.demo.contorller;
 
+import com.example.demo.dto.BusinessEntityAllLimitsDto;
 import com.example.demo.dto.BusinessEntityDto;
 import com.example.demo.dto.BusinessEntityLimitDto;
 import com.example.demo.entity.BusinessEntity;
 import com.example.demo.entity.Category;
 import com.example.demo.service.BusinessEntityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/business")
@@ -28,6 +25,12 @@ public class BusinessEntityController {
     @PostMapping("/")
     public void newBusinessEntity(@RequestBody BusinessEntityDto businessEntityDto) {
         businessEntityService.save(new BusinessEntity( businessEntityDto.getName(),businessEntityDto.getAccount()));
+    }
+
+    @GetMapping("/accountLimits")
+    public BusinessEntityAllLimitsDto getAccountLimits(Integer account) {
+        BusinessEntityAllLimitsDto businessEntityAllLimitsDto = new BusinessEntityAllLimitsDto(businessEntityService.findByAccount(account));
+        return businessEntityAllLimitsDto;
     }
 
     /*

@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class ExchangeRateServiceImpl implements TempoService<ExchangeRate> {
+public class ExchangeRateServiceImpl  {
 
     private static final String REQUEST_URL_START = "https://api.twelvedata.com/exchange_rate?symbol=USD/";
     private static final String REQUEST_URL_END = "&apikey=0169f4d282b24bdf9fd94858ee14d583";
@@ -26,7 +26,6 @@ public class ExchangeRateServiceImpl implements TempoService<ExchangeRate> {
     @Autowired
     private ExchangeRateRepository exchangeRateRepository;
 
-    @Override
     @Transactional
     public ExchangeRate save(ExchangeRate exchangeRate) {
         return exchangeRateRepository.save(exchangeRate);
@@ -36,13 +35,11 @@ public class ExchangeRateServiceImpl implements TempoService<ExchangeRate> {
         return exchangeRateRepository.findAll();
     }
 
-    @Override
     @Transactional
     public void deleteById(Integer id) {
         exchangeRateRepository.deleteById(id);
     }
 
-    @Override
     @Transactional
     public void deleteAll() {
         exchangeRateRepository.deleteAll();

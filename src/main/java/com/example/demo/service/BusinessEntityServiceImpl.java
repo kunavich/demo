@@ -11,12 +11,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Service
-public class BusinessEntityServiceImpl implements TempoService<BusinessEntity> {
+public class BusinessEntityServiceImpl {
 
     @Autowired
     private BusinessEntityRepository businessEntityRepository;
 
-    @Override
     @Transactional
     public BusinessEntity save(BusinessEntity businessEntity) {
         return businessEntityRepository.save(businessEntity);
@@ -26,13 +25,11 @@ public class BusinessEntityServiceImpl implements TempoService<BusinessEntity> {
         return businessEntityRepository.findAll();
     }
 
-    @Override
     @Transactional
     public void deleteById(Integer id) {
         businessEntityRepository.deleteById(id);
     }
 
-    @Override
     @Transactional
     public void deleteAll() {
         businessEntityRepository.deleteAll();

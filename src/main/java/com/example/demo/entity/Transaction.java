@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.dto.TransactionDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +33,7 @@ public class Transaction {
     private Float summary;
 
     @Column(name = "expense_category")
-    private Category expenseCategory;
+    private String expenseCategory;
 
     @Column(name = "datetime")
     private Timestamp datetime;
@@ -40,12 +41,21 @@ public class Transaction {
     @Column(name = "limit_exceeded")
     private Boolean limitExceeded;
 
-    public Transaction(Integer accountFrom, Integer accountTo, String currencyShortname, Float summary, Category expenseCategory, Timestamp datetime) {
+    public Transaction(Integer accountFrom, Integer accountTo, String currencyShortname, Float summary, String expenseCategory, Timestamp datetime) {
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.currencyShortname = currencyShortname;
         this.summary = summary;
         this.expenseCategory = expenseCategory;
         this.datetime = datetime;
+    }
+
+    public Transaction(TransactionDto transactionDto) {
+        this.accountFrom = transactionDto.getAccountFrom();
+        this.accountTo = transactionDto.getAccountTo();
+        this.currencyShortname = transactionDto.getCurrencyShortname();
+        this.summary = transactionDto.getSummary();
+        this.expenseCategory = transactionDto.getExpenseCategory();
+        this.datetime = Timestamp.valueOf(transactionDto.getDatetime());
     }
 }
