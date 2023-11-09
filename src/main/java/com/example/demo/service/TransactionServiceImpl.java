@@ -7,6 +7,7 @@ import com.example.demo.entity.BusinessEntity;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.ExchangeRate;
 import com.example.demo.entity.Transaction;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class TransactionServiceImpl  {
 
     @Autowired
@@ -65,10 +67,6 @@ public class TransactionServiceImpl  {
 
     public List<Transaction> findAll() {
         return transactionRepository.findAll();
-    }
-
-    public Transaction save(Transaction transaction) {
-        return null;
     }
 
     @Transactional

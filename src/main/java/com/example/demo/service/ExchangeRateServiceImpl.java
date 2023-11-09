@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.ExchangeRateRepository;
 import com.example.demo.entity.ExchangeRate;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
+@Slf4j
 public class ExchangeRateServiceImpl  {
 
     private static final String REQUEST_URL_START = "https://api.twelvedata.com/exchange_rate?symbol=USD/";
