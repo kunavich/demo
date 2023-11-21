@@ -15,3 +15,8 @@ automatically sets the current date, not allowing it to be set in the past or fu
 is forbidden to update existing limits;
 6. At the client's request, return a list of transactions that have exceeded the limit, indicating
 the limit that has been exceeded (date of setting, limit amount, currency (USD)).
+
+TODO 
+1) use JOIN in transactionalService
+2) transactional leading zero or out of int problem
+3) problem with Unix time

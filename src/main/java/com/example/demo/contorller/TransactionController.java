@@ -20,8 +20,7 @@ public class TransactionController {
     @GetMapping("/limitExceededList")
     public List<TransactionWithLimitsDto> getLimitExceededList() {
         log.info("Get Limit Exceeded List");
-        List<TransactionWithLimitsDto> list=transactionService.findAllWithLimitExceeded();
-        return list;
+        return transactionService.findAllWithLimitExceeded();
     }
 
     @PostMapping("/")

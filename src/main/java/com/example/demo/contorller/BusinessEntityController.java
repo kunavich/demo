@@ -21,8 +21,7 @@ public class BusinessEntityController {
     @PostMapping("/setLimit")
     public void setLimit(@RequestBody BusinessEntityLimitDto limitDto) {
         log.info("Set Business Entity Limit");
-        Category cat = Category.valueOf(limitDto.getCategory());
-        businessEntityService.setLimit(limitDto.getAccount(),limitDto.getLimit(),cat);
+        businessEntityService.setLimit(limitDto.getAccount(),limitDto.getLimit(),Category.valueOf(limitDto.getCategory()));
     }
 
     @PostMapping("/")
@@ -34,22 +33,7 @@ public class BusinessEntityController {
     @GetMapping("/accountLimits")
     public BusinessEntityAllLimitsDto getAccountLimits(Integer account) {
         log.info("Get Account Limits");
-        BusinessEntityAllLimitsDto businessEntityAllLimitsDto = new BusinessEntityAllLimitsDto(businessEntityService.findByAccount(account));
-        return businessEntityAllLimitsDto;
+        return new BusinessEntityAllLimitsDto(businessEntityService.findByAccount(account));
     }
-
-    /*
-    @PostMapping("/")
-    public void newBusinessEntity(String name, Integer account,String limitCategory, Integer limit) {
-        Category category = Category.valueOf(limitCategory);
-        businessEntityService.save(new BusinessEntity( name,account,category,limit));
-    }
-
-    @PostMapping("/")
-    public void newBusinessEntity(String name, Integer account, Integer limitOfGoods, Integer limitOfServices) {
-        businessEntityService.save(new BusinessEntity( name,account,limitOfGoods,limitOfServices));
-    }
-
-     */
 
 }

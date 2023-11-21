@@ -61,7 +61,7 @@ public class BusinessEntity {
         this.dateOfSum = new Timestamp(System.currentTimeMillis());
     }
 
-    /*
+    /* TODO delete
     public BusinessEntity(String name, Integer account, Category limitCategory, Integer limit) {
         this.name = name;
         this.account = account;
