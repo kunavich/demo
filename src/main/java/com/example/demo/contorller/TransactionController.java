@@ -23,7 +23,14 @@ public class TransactionController {
         return transactionService.findAllWithLimitExceeded();
     }
 
-    @PostMapping("/")
+    @GetMapping("/allTransactionList")
+    public List<TransactionDto> getAllTransactionList() {
+        log.info("Get all  Transaction List");
+        return transactionService.findAll();
+    }
+
+
+    @PostMapping("/newTransaction")
     public void newTransaction(@RequestBody TransactionDto transactionDto) {
         log.info("Save Transaction");
         transactionService.save(transactionDto);

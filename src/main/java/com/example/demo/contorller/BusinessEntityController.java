@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/business")
 @Slf4j
 public class BusinessEntityController {
@@ -24,7 +25,7 @@ public class BusinessEntityController {
         businessEntityService.setLimit(limitDto.getAccount(),limitDto.getLimit(),Category.valueOf(limitDto.getCategory()));
     }
 
-    @PostMapping("/")
+    @PostMapping("/newBusinessEntity")
     public void newBusinessEntity(@RequestBody BusinessEntityDto businessEntityDto) {
         log.info("Save Business Entity");
         businessEntityService.save(new BusinessEntity( businessEntityDto.getName(),businessEntityDto.getAccount()));

@@ -68,8 +68,13 @@ public class TransactionServiceImpl  {
         return businessEntity;
     }
 
-    public List<Transaction> findAll() {
-        return transactionRepository.findAll();
+    public List<TransactionDto> findAll() {
+        List<TransactionDto> transactionList = new ArrayList<>();
+        transactionRepository.findAll().forEach((t) -> {
+            TransactionDto transaction = new TransactionDto(t);
+            transactionList.add(transaction);
+            });
+        return transactionList;
     }
 
     @Transactional
