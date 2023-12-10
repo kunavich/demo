@@ -39,7 +39,7 @@ public class TransactionServiceImpl  {
 
         businessEntity = checkSumDate( businessEntity);
 
-        Integer limit;
+        Float limit;
         Float sumUSD = transaction.getSummary() / exchangeRate.getRate();
 
         if (Category.valueOf(transaction.getExpenseCategory()).equals(Category.PRODUCT)) {

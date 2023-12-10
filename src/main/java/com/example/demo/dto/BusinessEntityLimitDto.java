@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class BusinessEntityLimitDto {
 
-    private int account;
+    private String account;
     private int limit;
     private String category;
 }

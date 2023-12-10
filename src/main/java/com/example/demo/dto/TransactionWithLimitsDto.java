@@ -11,8 +11,8 @@ import lombok.Data;
 public class TransactionWithLimitsDto {
     public static final String LIMIT_CURRENCY_SHORTNAME = "USD";
 
-    private int accountFrom;
-    private int accountTo;
+    private String accountFrom;
+    private String accountTo;
     private String currencyShortname;
     private float summary;
     private String expenseCategory;

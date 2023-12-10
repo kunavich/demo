@@ -9,9 +9,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class BusinessEntityAllLimitsDto {
     private String name;
-    private int account;
-    private Integer limitOfGoods;
-    private Integer limitOfServices;
+    private String account;
+    private Float limitOfGoods;
+    private Float limitOfServices;
 
     public BusinessEntityAllLimitsDto (BusinessEntity businessEntity) {
         this.account=businessEntity.getAccount();

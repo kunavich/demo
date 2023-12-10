@@ -1,7 +1,7 @@
 CREATE TABLE transactions (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  account_from int NOT NULL,
-  account_to int NOT NULL,
+  account_from varchar(10) NOT NULL,
+  account_to varchar(10)  NOT NULL,
   currency_shortname varchar(4) NOT NULL,
   summary float NOT NULL,
   expense_category varchar(7) NOT NULL,
@@ -12,9 +12,9 @@ CREATE TABLE transactions (
 CREATE TABLE business_entity (
   id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(45) NOT NULL,
-  account int NOT NULL,
-  limit_of_goods int NOT NULL,
-  limit_of_services int NOT NULL,
+  account varchar(10)  NOT NULL,
+  limit_of_goods float NOT NULL,
+  limit_of_services float NOT NULL,
   date_of_services_limit timestamp DEFAULT NULL,
   date_of_goods_limit timestamp DEFAULT NULL,
   sum_of_services float NOT NULL,

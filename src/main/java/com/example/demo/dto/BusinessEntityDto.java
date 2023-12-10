@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class BusinessEntityDto {
     private String name;
-    private int account;
+    private String account;
 }

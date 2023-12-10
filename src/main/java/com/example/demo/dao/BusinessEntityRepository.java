@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BusinessEntityRepository extends JpaRepository<BusinessEntity,Integer> {
 
-    BusinessEntity findByAccount(Integer account);
+    BusinessEntity findByAccount(String account);
 }

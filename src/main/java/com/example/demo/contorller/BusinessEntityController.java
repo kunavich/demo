@@ -31,7 +31,7 @@ public class BusinessEntityController {
     }
 
     @GetMapping("/accountLimits")
-    public BusinessEntityAllLimitsDto getAccountLimits(Integer account) {
+    public BusinessEntityAllLimitsDto getAccountLimits(String account) {
         log.info("Get Account Limits");
         return new BusinessEntityAllLimitsDto(businessEntityService.findByAccount(account));
     }

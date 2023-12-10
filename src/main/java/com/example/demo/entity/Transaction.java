@@ -20,13 +20,11 @@ public class Transaction {
     @Column(name = "id")
     private int id;
 
-    //TODO leading zero not allowed && out of range ex 999999999
     @Column(name = "account_from")
-    private Integer accountFrom;
+    private String accountFrom;
 
-    //TODO leading zero not allowed && out of range ex 999999999
     @Column(name = "account_to")
-    private Integer accountTo;
+    private String accountTo;
 
     @Column(name = "currency_shortname")
     private String currencyShortname;
@@ -43,7 +41,7 @@ public class Transaction {
     @Column(name = "limit_exceeded")
     private Boolean limitExceeded;
 
-    public Transaction(Integer accountFrom, Integer accountTo, String currencyShortname, Float summary, String expenseCategory, Timestamp datetime) {
+    public Transaction(String accountFrom, String accountTo, String currencyShortname, Float summary, String expenseCategory, Timestamp datetime) {
         this.accountFrom = accountFrom;
         this.accountTo = accountTo;
         this.currencyShortname = currencyShortname;

@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class BusinessEntity {
 
-    public static final int DEFAULT_LIMIT = 1000;
+    public static final Float DEFAULT_LIMIT = 1000f;
     public static final float DEFAULT_SUM = 0f;
 
     @Id
@@ -25,15 +25,14 @@ public class BusinessEntity {
     @Column(name = "name")
     private String name;
 
-    //TODO leading zero not allowed
     @Column(name = "account")
-    private Integer account;
+    private String account;
 
     @Column(name = "limit_of_goods")
-    private Integer limitOfGoods;
+    private Float limitOfGoods;
 
     @Column(name = "limit_of_services")
-    private Integer limitOfServices;
+    private Float limitOfServices;
 
     @Column(name = "date_of_services_limit")
     private Timestamp dateOfServicesLimit;
@@ -50,7 +49,7 @@ public class BusinessEntity {
     @Column(name = "date_of_sum")
     private Timestamp dateOfSum;
 
-    public BusinessEntity(String name, Integer account) {
+    public BusinessEntity(String name, String account) {
         this.name = name;
         this.account = account;
         this.limitOfGoods = DEFAULT_LIMIT;
@@ -60,38 +59,4 @@ public class BusinessEntity {
         this.sumOfServices = DEFAULT_SUM;
         this.dateOfSum = new Timestamp(System.currentTimeMillis());
     }
-
-    /* TODO delete
-    public BusinessEntity(String name, Integer account, Category limitCategory, Integer limit) {
-        this.name = name;
-        this.account = account;
-        if (limitCategory.equals(Category.PRODUCT)) {
-            this.limitOfGoods = limit;
-            this.limitOfServices = DEFAULT_LIMIT;
-            this.dateOfGoodsLimit = new Timestamp(System.currentTimeMillis());
-        } else {
-            this.limitOfGoods = DEFAULT_LIMIT;
-            this.limitOfServices = limit;
-            this.dateOfServicesLimit = new Timestamp(System.currentTimeMillis());
-        }
-
-        this.sumOfGoods = DEFAULT_SUM;
-        this.sumOfServices = DEFAULT_SUM;
-        this.dateOfSum = new Timestamp(System.currentTimeMillis());
-    }
-
-    public BusinessEntity(String name, Integer account, Integer limitOfGoods, Integer limitOfServices) {
-        this.name = name;
-        this.account = account;
-        this.limitOfGoods = limitOfGoods;
-        this.limitOfServices = limitOfServices;
-        this.dateOfGoodsLimit = new Timestamp(System.currentTimeMillis());
-        this.dateOfServicesLimit = new Timestamp(System.currentTimeMillis());
-
-        this.sumOfGoods = DEFAULT_SUM;
-        this.sumOfServices = DEFAULT_SUM;
-        this.dateOfSum = new Timestamp(System.currentTimeMillis());
-    }
-
-     */
 }

@@ -37,7 +37,7 @@ public class BusinessEntityServiceImpl {
         businessEntityRepository.deleteAll();
     }
 
-    public void setLimit(int account, int limit, Category category) {
+    public void setLimit(String account, float limit, Category category) {
         BusinessEntity businessEntity = findByAccount(account);
         if (category.equals(Category.PRODUCT)) {
             if(businessEntity.getDateOfGoodsLimit() != null){
@@ -55,7 +55,7 @@ public class BusinessEntityServiceImpl {
         save(businessEntity);
     }
 
-    public BusinessEntity findByAccount(Integer account) {
+    public BusinessEntity findByAccount(String account) {
         return businessEntityRepository.findByAccount(account);
     }
 

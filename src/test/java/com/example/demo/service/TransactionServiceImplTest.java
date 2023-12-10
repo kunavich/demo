@@ -14,8 +14,8 @@ public class TransactionServiceImplTest {
 
     @Test
     public void whenDateIsTheSameCheckSumDateTest() {
-        BusinessEntity root = new BusinessEntity("roga i kopyta",1000000123);
-        BusinessEntity businessEntity = new BusinessEntity("roga i kopyta",1000000123);
+        BusinessEntity root = new BusinessEntity("roga i kopyta","1000000123");
+        BusinessEntity businessEntity = new BusinessEntity("roga i kopyta","1000000123");
 
         root.setDateOfSum(new Timestamp(System.currentTimeMillis()));
         businessEntity.setDateOfSum(new Timestamp(System.currentTimeMillis()));
@@ -26,8 +26,8 @@ public class TransactionServiceImplTest {
     }
     @Test
     public void whenDateIsNotSameCheckSumDateTest() {
-        BusinessEntity root = new BusinessEntity("roga i kopyta",1000000123);
-        BusinessEntity businessEntity = new BusinessEntity("roga i kopyta",1000000123);
+        BusinessEntity root = new BusinessEntity("roga i kopyta","1000000123");
+        BusinessEntity businessEntity = new BusinessEntity("roga i kopyta","1000000123");
 
         root.setDateOfSum(new Timestamp(System.currentTimeMillis()));
         businessEntity.setDateOfSum(new Timestamp(1663027200000L));
