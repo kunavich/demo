@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+//TODO ERRORS example error if there no business unit and we entering transaction
 @ControllerAdvice
 public class RestExceptionHandler {
     @ExceptionHandler

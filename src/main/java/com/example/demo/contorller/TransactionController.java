@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/transaction")
 @Slf4j
 public class TransactionController {
@@ -29,11 +30,9 @@ public class TransactionController {
         return transactionService.findAll();
     }
 
-
     @PostMapping("/newTransaction")
     public void newTransaction(@RequestBody TransactionDto transactionDto) {
         log.info("Save Transaction");
         transactionService.save(transactionDto);
     }
-
 }
